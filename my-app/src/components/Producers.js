@@ -8,17 +8,15 @@ const PurpleDiv = styled.div`
     border: solid 4px rgb(128, 17, 128);
     padding: 5px;
     margin: 10px;
-    display: flex;
-    flex-direction: column;
 `
 
 function Producers() {
 
     return (
         <>
-          
             <PurpleDiv>
             <h2>PRODUCERS</h2>
+            <hr></hr>
             {
                 producerTopicData.map((topic) => {
                     return (

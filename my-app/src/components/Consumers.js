@@ -15,6 +15,7 @@ function Consumers() {
         <>  
             <OrangeBox>
             <h2>CONSUMERS</h2>
+            <hr></hr>
             {
                 consumerTopicData.map((topic) => {
                     return (

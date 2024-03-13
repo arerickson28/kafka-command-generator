@@ -31,12 +31,7 @@ function Topic({isProducer, topicData}) {
 
 
     const [isDisplayedState, setIsDisplayedState] = useState(false)
-
-    const toggleOff = () => {
-        setIsDisplayedState(!isDisplayedState)
-        console.log(isDisplayedState)
-    }
-
+    const [kafkaCmdState, setKafkaCmdState] = useState("hey")
 
     return (
         <>
@@ -48,11 +43,20 @@ function Topic({isProducer, topicData}) {
                 {
                     isDisplayedState ?
                     <>
-                    <h3>StageServer: {topicData.stageServer}</h3>
-                    <h3>ProdServert: {topicData.prodServer}</h3>
-                    <textarea></textarea>
+                    {/* <h3>StageServer: {topicData.stageServer}</h3>
+                    <h3>ProdServert: {topicData.prodServer}</h3> */}
+                    <div>
+                    <input type="radio" />
+                    <label>Prod</label>
+                    <input type="radio" />
+                    <label>Stage</label>
+                    </div>
+                   
+                    {/* <textarea></textarea> */}
+                    <hr></hr>
+                    <h3>{kafkaCmdState}</h3>
                     <br></br>
-                    <button>Save For Later</button>
+                    {/* <button>Save For Later</button> */}
                     <button onClick = {() => {setIsDisplayedState(!isDisplayedState)} }>Collapse</button>
                     </>
                     
@@ -67,11 +71,17 @@ function Topic({isProducer, topicData}) {
                 {
                     isDisplayedState ?
                     <>
-                    <h3>StageServer: {topicData.stageServer}</h3>
-                    <h3>ProdServert: {topicData.prodServer}</h3>
-                    <textarea></textarea>
+                    {/* <h3>StageServer: {topicData.stageServer}</h3>
+                    <h3>ProdServert: {topicData.prodServer}</h3> */}
+                    <input type="radio" />
+                    <label>Prod</label>
+                    <input type="radio" />
+                    <label>Stage</label>
+                    {/* <textarea></textarea> */}
+                    <hr></hr>
+                    <h2>{kafkaCmdState}</h2>
                     <br></br>
-                    <button>Save For Later</button>
+                    {/* <button>Save For Later</button> */}
                     <button onClick = {() => {setIsDisplayedState(false)}}>Collapse</button>
                     </>
                 
