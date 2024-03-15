@@ -46,9 +46,9 @@ function Topic({isProducer, topicData}) {
                     {/* <h3>StageServer: {topicData.stageServer}</h3>
                     <h3>ProdServert: {topicData.prodServer}</h3> */}
                     <div>
-                    <input type="radio" />
+                    <input value = "prod" type="radio" onInput={(e) => setKafkaCmdState(e.target.value)}/>
                     <label>Prod</label>
-                    <input type="radio" />
+                    <input value = "stage" type="radio" onInput={(e) => setKafkaCmdState(e.target.value)} />
                     <label>Stage</label>
                     </div>
                    
@@ -73,9 +73,9 @@ function Topic({isProducer, topicData}) {
                     <>
                     {/* <h3>StageServer: {topicData.stageServer}</h3>
                     <h3>ProdServert: {topicData.prodServer}</h3> */}
-                    <input type="radio" />
+                    <input value = "prod" type="radio" onInput={(e) => setKafkaCmdState(e.target.value)}/>
                     <label>Prod</label>
-                    <input type="radio" />
+                    <input value = "stage" type="radio" onInput={(e) => setKafkaCmdState(e.target.value)}/>
                     <label>Stage</label>
                     {/* <textarea></textarea> */}
                     <hr></hr>
