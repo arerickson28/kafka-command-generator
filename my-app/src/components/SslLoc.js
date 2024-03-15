@@ -54,6 +54,7 @@ function SslLoc() {
                    
     
                     <button onClick = {() => {setIsDisplayedState(!isDisplayedState)} }>Save to local storage</button>
+                    <button onClick = {() => {setIsDisplayedState(!isDisplayedState)} }>Cancel</button>
                     </>
                     
                     : <></> 
