@@ -31,7 +31,7 @@ function Topic({isProducer, topicData, sslLocInfo}) {
 
 
     const [isDisplayedState, setIsDisplayedState] = useState(false)
-    const [brokerSelectionState, setBrokerSelectionState] = useState("<selectBroker>")
+    const [brokerSelectionState, setBrokerSelectionState] = useState("<selectServer>")
 
     let producerOrConsumer;
     if (isProducer) {
