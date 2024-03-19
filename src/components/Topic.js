@@ -40,7 +40,7 @@ function Topic({isProducer, topicData, sslLocInfo}) {
         producerOrConsumer = "C"
     }
 
-    const sslString = `-X ssl.certificate.location=${sslLocInfo.ssl_certificate_location} -X ssl.key.location=${sslLocInfo.ssl_key_location} -X security.protocol=ssl -X ssl.ca.location=${sslLocInfo.ssl_ca_location}`
+    const sslString = `-X security.protocol=ssl -X ssl.certificate.location=${sslLocInfo.ssl_certificate_location} -X ssl.key.location=${sslLocInfo.ssl_key_location} -X ssl.ca.location=${sslLocInfo.ssl_ca_location}`
     const kafkaCmd = `kcat -${producerOrConsumer} ${sslString} -b ${brokerSelectionState} -t ${topicData.topicName}`
 
     return (
@@ -56,15 +56,15 @@ function Topic({isProducer, topicData, sslLocInfo}) {
                     {/* <h3>StageServer: {topicData.stageServer}</h3>
                     <h3>ProdServert: {topicData.prodServer}</h3> */}
                     <div>
-                    <input value = {topicData.prodServer} type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)}/>
+                    <input value = {topicData.prodServer} name="server" type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)}/>
                     <label>Prod</label>
-                    <input value = {topicData.stageServer} type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)} />
+                    <input value = {topicData.stageServer} name="server" type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)} />
                     <label>Stage</label>
                     </div>
                    
                     {/* <textarea></textarea> */}
                     <hr></hr>
-                    <h3>{brokerSelectionState}</h3>
+                    <h3>{kafkaCmd}</h3>
                     <br></br>
                     {/* <button>Save For Later</button> */}
                     <button onClick = {() => {setIsDisplayedState(!isDisplayedState)} }>Collapse</button>
@@ -83,9 +83,10 @@ function Topic({isProducer, topicData, sslLocInfo}) {
                     <>
                     {/* <h3>StageServer: {topicData.stageServer}</h3>
                     <h3>ProdServert: {topicData.prodServer}</h3> */}
-                    <input value = {topicData.prodServer} type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)}/>
+
+                    <input value = {topicData.prodServer} name="server" type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)}/>
                     <label>Prod</label>
-                    <input value = {topicData.stageServer} type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)}/>
+                    <input value = {topicData.stageServer} name="server" type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)}/>
                     <label>Stage</label>
                     {/* <textarea></textarea> */}
                     <hr></hr>
