@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/kafka-command-generator/static/css/main.f855e6bc.css",
-    "main.js": "/kafka-command-generator/static/js/main.2b88f969.js",
+    "main.js": "/kafka-command-generator/static/js/main.ef875a77.js",
     "static/js/453.c1b2bb01.chunk.js": "/kafka-command-generator/static/js/453.c1b2bb01.chunk.js",
     "index.html": "/kafka-command-generator/index.html",
     "main.f855e6bc.css.map": "/kafka-command-generator/static/css/main.f855e6bc.css.map",
-    "main.2b88f969.js.map": "/kafka-command-generator/static/js/main.2b88f969.js.map",
+    "main.ef875a77.js.map": "/kafka-command-generator/static/js/main.ef875a77.js.map",
     "453.c1b2bb01.chunk.js.map": "/kafka-command-generator/static/js/453.c1b2bb01.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.2b88f969.js"
+    "static/js/main.ef875a77.js"
   ]
 }
