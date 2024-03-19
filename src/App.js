@@ -32,6 +32,19 @@ function App() {
     "ssl_key_location": "<changeMe>",
     "ssl_ca_location": "<changeMe>"
   }
+
+  const sslLoc1 = {
+    "stage":{
+      "ssl_certificate_location": "<changeMe>",
+      "ssl_key_location": "<changeMe>",
+      "ssl_ca_location": "<changeMe>"
+    },
+    "prod": {
+      "ssl_certificate_location": "<changeMe>",
+      "ssl_key_location": "<changeMe>",
+      "ssl_ca_location": "<changeMe>"
+    }
+  }
   
   function setLocalStorageIfNull(obj) {
       if (store.get("sslLoc") == null) {
@@ -39,7 +52,7 @@ function App() {
       }
   }
   
-  setLocalStorageIfNull(sslLoc)
+  setLocalStorageIfNull(sslLoc1)
 
   const [isDisplayedState, setIsDisplayedState] = useState(false)
   const [showUpdateBtnState, setShowUpdateBtnState] = useState(true)
@@ -51,6 +64,7 @@ function App() {
 //     })
 
   const [sslLocInfoState, setSslLocInfoState] = useState(store.get("sslLoc"))
+  const [sslEnvState, setSslEnvState] = useState("stage")
 
 
   function saveToLocalStorage() {
@@ -63,6 +77,24 @@ function App() {
       setShowUpdateBtnState(!showUpdateBtnState)
   }
 
+  function handleInput(e, sslType) {
+    if (sslEnvState == "stage") {
+
+      let tempLocInfoState = sslLocInfoState
+      tempLocInfoState.stage[sslType] = e.target.value
+
+      setSslLocInfoState(tempLocInfoState)
+    } else {
+      let tempLocInfoState = sslLocInfoState
+      tempLocInfoState.prod[sslType] = e.target.value
+
+      setSslLocInfoState(tempLocInfoState)
+    }
+
+ 
+  }
+
+
   return (
     <div className="App">
       <h1>Kafka Command Generator</h1>
@@ -71,10 +103,16 @@ function App() {
       <div>
         <TealBox>
         <h3>Your SSL Location</h3>
+        <div>
+                    <input value = "prod" name="env" type="radio" onInput={(e) => setSslEnvState(e.target.value)}/>
+                    <label>Prod</label>
+                    <input value = "stage" name="env" type="radio" defaultChecked onInput={(e) => setSslEnvState(e.target.value)} />
+                    <label>Stage</label>
+        </div>
         <PartsDiv>
-        <h3>ssl.certificate.location = {sslLocInfoState.ssl_certificate_location}</h3>
-        <h3>ssl.key.location = {sslLocInfoState.ssl_key_location}</h3>
-        <h3>ssl.ca.location = {sslLocInfoState.ssl_ca_location}</h3>
+        <h3>ssl.certificate.location = {sslLocInfoState[sslEnvState].ssl_certificate_location}</h3>
+        <h3>ssl.key.location = {sslLocInfoState[sslEnvState].ssl_key_location}</h3>
+        <h3>ssl.ca.location = {sslLocInfoState[sslEnvState].ssl_ca_location}</h3>
         </PartsDiv>
         <hr></hr>
         
@@ -88,18 +126,25 @@ function App() {
                     {/* <div> */}
                     <div>
                     <label>ssl.certificate.location = </label>
-                    <input onInput={e => setSslLocInfoState({
+                    {/* <input onInput={e => setSslLocInfoState({
                         ...sslLocInfoState,
-                        "ssl_certificate_location": e.target.value
-
-                    })} type="text" />
+                        "stage": {
+                          ...sslLocInfoState.stage,
+                          "ssl_certificate_location": e.target.value
+                        }
+                    })} type="text" /> */}
+                      <input onInput={e => handleInput(e, "ssl_certificate_location")} type="text" />
                     </div>
-
+                   
                     <div>
                     <label>ssl.key.location = </label>
                     <input onInput={e => setSslLocInfoState({
                         ...sslLocInfoState,
-                        "ssl_key_location": e.target.value
+                        "stage": {
+                          ...sslLocInfoState.stage,
+                          "ssl_key_location": e.target.value
+                        }
+                        
 
                     })}type="text" />
                     </div>
@@ -108,8 +153,10 @@ function App() {
                     <label>ssl.ca.location = </label>
                     <input onInput={e => setSslLocInfoState({
                         ...sslLocInfoState,
-                        "ssl_ca_location": e.target.value
-
+                        "stage": {
+                          ...sslLocInfoState.stage,
+                          "ssl_ca_location": e.target.value
+                        }
                     })}type="text" />
                     </div>
                 
