@@ -10,7 +10,7 @@ const OrangeBox = styled.div`
     width: 500px;
 `
 
-function Consumers({consumerData}) {
+function Consumers({consumerData, sslLocInfo}) {
     return (
         <>  
             <OrangeBox>
@@ -20,7 +20,7 @@ function Consumers({consumerData}) {
                 consumerData.map((topic) => {
                     return (
                         <>
-                        <Topic isProducer = {false} topicData={topic}/>
+                        <Topic isProducer = {false} topicData={topic} sslLocInfo={sslLocInfo}/>
                         </>
                     )
                 })

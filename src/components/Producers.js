@@ -10,7 +10,7 @@ const PurpleDiv = styled.div`
     width: 500px;
 `
 
-function Producers({producerData}) {
+function Producers({producerData, sslLocInfo}) {
 
     return (
         <>
@@ -21,7 +21,7 @@ function Producers({producerData}) {
                 producerData.map((topic) => {
                     return (
                         <>
-                        <Topic isProducer = {true} topicData = {topic}/>
+                        <Topic isProducer = {true} topicData = {topic} sslLocInfo={sslLocInfo}/>
                         </>
                     )
                 })
