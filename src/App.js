@@ -138,26 +138,12 @@ function App() {
                    
                     <div>
                     <label>ssl.key.location = </label>
-                    <input onInput={e => setSslLocInfoState({
-                        ...sslLocInfoState,
-                        "stage": {
-                          ...sslLocInfoState.stage,
-                          "ssl_key_location": e.target.value
-                        }
-                        
-
-                    })}type="text" />
+                    <input onInput={e => handleInput(e, "ssl_key_location")}type="text" />
                     </div>
                   
                     <div>
                     <label>ssl.ca.location = </label>
-                    <input onInput={e => setSslLocInfoState({
-                        ...sslLocInfoState,
-                        "stage": {
-                          ...sslLocInfoState.stage,
-                          "ssl_ca_location": e.target.value
-                        }
-                    })}type="text" />
+                    <input onInput={e => handleInput(e, "ssl_ca_location")}type="text" />
                     </div>
                 
                     {/* </div> */}

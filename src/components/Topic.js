@@ -31,7 +31,8 @@ function Topic({isProducer, topicData, sslLocInfo}) {
 
 
     const [isDisplayedState, setIsDisplayedState] = useState(false)
-    const [brokerSelectionState, setBrokerSelectionState] = useState("<selectServer>")
+    const [serverSelectionState, setServerSelectionState] = useState("<selectServer>")
+    const [sslEnvState, setSslEnvState] = useState("stage")
 
     let producerOrConsumer;
     if (isProducer) {
@@ -39,9 +40,14 @@ function Topic({isProducer, topicData, sslLocInfo}) {
     } else {
         producerOrConsumer = "C"
     }
+    console.log(sslLocInfo)
+    const sslString = `-X security.protocol=ssl -X ssl.certificate.location=${sslLocInfo[sslEnvState].ssl_certificate_location} -X ssl.key.location=${sslLocInfo[sslEnvState].ssl_key_location} -X ssl.ca.location=${sslLocInfo[sslEnvState].ssl_ca_location}`
+    const kafkaCmd = `kcat -${producerOrConsumer} ${sslString} -b ${serverSelectionState} -t ${topicData.topicName}`
 
-    const sslString = `-X security.protocol=ssl -X ssl.certificate.location=${sslLocInfo.ssl_certificate_location} -X ssl.key.location=${sslLocInfo.ssl_key_location} -X ssl.ca.location=${sslLocInfo.ssl_ca_location}`
-    const kafkaCmd = `kcat -${producerOrConsumer} ${sslString} -b ${brokerSelectionState} -t ${topicData.topicName}`
+    function handleSelection(e, env) {
+        setServerSelectionState(e.target.value)
+        setSslEnvState(env)
+    }
 
     return (
         <>
@@ -56,9 +62,9 @@ function Topic({isProducer, topicData, sslLocInfo}) {
                     {/* <h3>StageServer: {topicData.stageServer}</h3>
                     <h3>ProdServert: {topicData.prodServer}</h3> */}
                     <div>
-                    <input value = {topicData.prodServer} name="server" type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)}/>
+                    <input value = {topicData.prodServer} name={`${topicData.topicName}-P`} type="radio" onInput={(e) => handleSelection(e, "prod")}/>
                     <label>Prod</label>
-                    <input value = {topicData.stageServer} name="server" type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)} />
+                    <input value = {topicData.stageServer} defaultChecked name={`${topicData.topicName}-P`} type="radio" onInput={(e) => handleSelection(e, "stage")} />
                     <label>Stage</label>
                     </div>
                    
@@ -84,9 +90,9 @@ function Topic({isProducer, topicData, sslLocInfo}) {
                     {/* <h3>StageServer: {topicData.stageServer}</h3>
                     <h3>ProdServert: {topicData.prodServer}</h3> */}
 
-                    <input value = {topicData.prodServer} name="server" type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)}/>
+                    <input value = {topicData.prodServer} name={`${topicData.topicName}-C`} type="radio" onInput={(e) => handleSelection(e, "prod")}/>
                     <label>Prod</label>
-                    <input value = {topicData.stageServer} name="server" type="radio" onInput={(e) => setBrokerSelectionState(e.target.value)}/>
+                    <input value = {topicData.stageServer} defaultChecked name={`${topicData.topicName}-C`} type="radio" onInput={(e) => handleSelection(e, "stage")}/>
                     <label>Stage</label>
                     {/* <textarea></textarea> */}
                     <hr></hr>
