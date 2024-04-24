@@ -31,7 +31,7 @@ function Topic({isProducer, topicData, sslLocInfo}) {
 
 
     const [isDisplayedState, setIsDisplayedState] = useState(false)
-    const [serverSelectionState, setServerSelectionState] = useState("<selectServer>")
+    const [serverSelectionState, setServerSelectionState] = useState(topicData.stageServer)
     const [sslEnvState, setSslEnvState] = useState("stage")
 
     let producerOrConsumer;
